@@ -11,8 +11,10 @@ function processForm(formObject): string {
     const lastRow = sheet.getLastRow();
     const calorieCell = sheet.getRange(lastRow, 2).getA1Notation();
     const timeCell = sheet.getRange(lastRow, 3).getA1Notation();
-    sheet.getRange(lastRow, 4).setFormula("=F1+" + calorieCell);
-    sheet.getRange(lastRow, 5).setFormula("=" + calorieCell + "/" + timeCell).setNumberFormat("0.0");
+    const totalCalorie = "=F1+" + calorieCell;
+    const timePerCalorie = "=" + calorieCell + "/" + timeCell;
+    sheet.getRange(lastRow, 4).setFormula(totalCalorie);
+    sheet.getRange(lastRow, 5).setFormula(timePerCalorie).setNumberFormat("0.0");
     return "送信完了";
 }
 
