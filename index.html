@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <base target="_top">
+        <script>
+        // Prevent forms from submitting.
+        function preventFormSubmit() {
+            var forms = document.querySelectorAll('form');
+            for (var i = 0; i < forms.length; i++) {
+                forms[i].addEventListener('submit', function(event) {
+                    event.preventDefault();
+                });
+            }
+        }
+        window.addEventListener('load', preventFormSubmit);
+        function handleFormSubmit(formObject) {
+            google.script.run.withSuccessHandler(successText).processForm(formObject);
+        }
+        function successText(text) {
+            var output = document.getElementById("output");
+            output.innerHTML = "<p>" + text + "</p>";
+        }
+        </script>
+    </head>
+  <body>
+    <p>Hello, GAS</p>
+    <form onsubmit="handleFormSubmit(this)">
+    <p>　　距離　　：<input type="text" name="mileage"></p>
+    <p>消費カロリー：<input type="text" name="calorie"></p>
+    <p>　運動時間　：<input type="text" name="time"></p>
+    <input type="submit" value="送信">
+    </form>
+    <div id="output"></div>
+    </body>
+</html>
