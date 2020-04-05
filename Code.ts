@@ -1,18 +1,19 @@
 function doGet(): GoogleAppsScript.HTML.HtmlOutput {
-    return HtmlService.createHtmlOutputFromFile("index");
+    const indexFile: GoogleAppsScript.HTML.HtmlOutput = HtmlService.createTemplateFromFile("index").evaluate();
+    return indexFile;
 }
 
 function processForm(formObject): string {
-    const mileage = formObject.mileage;
-    const calorie = formObject.calorie;
-    const time = formObject.time;
-    const sheet = SpreadsheetApp.getActiveSheet();
+    const mileage: any = formObject.mileage;
+    const calorie: any = formObject.calorie;
+    const time: any = formObject.time;
+    const sheet: GoogleAppsScript.Spreadsheet.Sheet = SpreadsheetApp.getActiveSheet();
     sheet.appendRow([mileage, calorie, time]);
-    const lastRow = sheet.getLastRow();
-    const calorieCell = sheet.getRange(lastRow, 2).getA1Notation();
-    const timeCell = sheet.getRange(lastRow, 3).getA1Notation();
-    const totalCalorie = "=F1+" + calorieCell;
-    const timePerCalorie = "=" + calorieCell + "/" + timeCell;
+    const lastRow: number = sheet.getLastRow();
+    const calorieCell: string = sheet.getRange(lastRow, 2).getA1Notation();
+    const timeCell: string = sheet.getRange(lastRow, 3).getA1Notation();
+    const totalCalorie: string = "=F1+" + calorieCell;
+    const timePerCalorie: string = "=" + calorieCell + "/" + timeCell;
     sheet.getRange(lastRow, 4).setFormula(totalCalorie);
     sheet.getRange(lastRow, 5).setFormula(timePerCalorie).setNumberFormat("0.0");
     return "送信完了";

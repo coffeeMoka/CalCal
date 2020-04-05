@@ -2,25 +2,8 @@
 <html>
     <head>
         <base target="_top">
-        <script>
-        // Prevent forms from submitting.
-        function preventFormSubmit() {
-            var forms = document.querySelectorAll('form');
-            for (var i = 0; i < forms.length; i++) {
-                forms[i].addEventListener('submit', function(event) {
-                    event.preventDefault();
-                });
-            }
-        }
-        window.addEventListener('load', preventFormSubmit);
-        function handleFormSubmit(formObject) {
-            google.script.run.withSuccessHandler(successText).processForm(formObject);
-        }
-        function successText(text) {
-            var output = document.getElementById("output");
-            output.innerHTML = "<p>" + text + "</p>";
-        }
-        </script>
+        <?!= HtmlService.createHtmlOutputFromFile("css").getContent(); ?>
+        <?!= HtmlService.createHtmlOutputFromFile("js").getContent(); ?>
     </head>
   <body>
     <p>Hello, GAS</p>
@@ -30,6 +13,6 @@
     <p>　運動時間　：<input type="text" name="time"></p>
     <input type="submit" value="送信">
     </form>
-    <div id="output"></div>
+    <?!= HtmlService.createHtmlOutputFromFile("bootjs").getContent(); ?>
     </body>
 </html>
