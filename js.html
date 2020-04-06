@@ -13,6 +13,7 @@
         google.script.run.withSuccessHandler(successText).processForm(formObject);
     }
     function successText(text) {
-        alert(text);
+        var output = document.getElementById("output");
+        output.innerHTML = "<p>" + text + "</p>";
     }
 </script>
