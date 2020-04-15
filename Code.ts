@@ -1,5 +1,6 @@
 function doGet(): GoogleAppsScript.HTML.HtmlOutput {
     const indexFile: GoogleAppsScript.HTML.HtmlOutput = HtmlService.createTemplateFromFile("index").evaluate();
+    indexFile.addMetaTag("viewport", "width=device-width,initial-scale=1");
     return indexFile;
 }
 
